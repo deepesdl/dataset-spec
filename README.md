@@ -10,9 +10,9 @@ by the DeepESDL project should look like. The goal of the convention is to ease
 access to data, make it compliant to existing data standards, make it 
 comprehensive and understandable, minimize the effort to ingest the data into 
 users’ processing, visualisation, and analysis code. Short, the goal is to 
-make AVL datasets analysis-ready.
+make DeepESDL datasets analysis-ready.
 The intention is neither to invent any new data formats nor trying to establish 
-new "standards". Instead, the AVL conventions solely build on existing, 
+new "standards". Instead, the DeepESDL conventions solely build on existing, 
 popular, well-established data formats and data standards.
 Due to the fundamental difference of gridded and vector datasets, we provide 
 two separate conventions.
@@ -113,7 +113,7 @@ the [CF Conventions on Coordinates].
 
 The temporal dimension of a data variables should be named `time`. It should be 
 the variable’s outermost dimension. A corresponding coordinate named `time` 
-must exists and the [CF Conventions on the Time Coordinate] must be applied.
+must exist and the [CF Conventions on the Time Coordinate] must be applied.
 For datasets generated within DeepESDL, it is recommended to use the unit 
 `seconds since 1970.01.01`.
 
@@ -242,4 +242,3 @@ Zip, e.g. for xarray this is `xarray.open_zarr("./dataset.zarr.zip")`.
 * Global WGS-84: [dataset_global.zarr.zip](data-samples/dataset_global.zarr.zip)
 * Projected CRS: [dataset_utm33n.zarr.zip](data-samples/dataset_utm33n.zarr.zip)
 * Satellite Viewing Geometry: _TODO (forman)_
-
