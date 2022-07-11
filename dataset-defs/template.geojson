@@ -2,7 +2,8 @@
     "type": "Feature",
     "properties": {
         "title": "Ocean Color Products in the Mediterranean Sea",
-        "data_id": "OC-CMEMS-MED-005-2005-2022-1d-v1.zarr",
+        "description": "...",
+        "data_id": "OC-CMEMS-MED-005-2005-2022-1d-v1",
         "time_range": ["2005-05-01", "2022-05-01"],
         "time_period": "1D",
         "bbox": [-6.75, 30, 36.5, 46],
@@ -15,8 +16,15 @@
                 "long_name": "Chlorophyll Concentration",
                 "dtype": "float32",
                 "sources": [
-                    "https://resources.marine.copernicus.eu/"
-                ],
+                    {
+                        "home_url": "https://resources.marine.copernicus.eu/",
+                        "data_url": "https://resources.marine.copernicus.eu/",
+                        "remarks": "",
+                        "license": "",
+                        "attributions": [],
+                        "processing_steps": []
+                    }
+                ]
             }
         ]
     },
@@ -29,7 +37,7 @@
                 [36.5, 46],
                 [-6.75, 46],
                 [-6.75, 30],
-            ],
+            ]
         ]
     }
 }

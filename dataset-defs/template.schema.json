@@ -18,7 +18,7 @@
                 "data_id",
                 "time_range",
                 "time_period",
-                "bbox",
+                "bbox"
             ],
             "properties": {
                 "title": {
@@ -85,7 +85,8 @@
                             "long_name",
                             "units",
                             "dtype",
-                            "dims"
+                            "dims",
+                            "sources"
                         ],
                         "properties": {
                             "name": {"type": "string"},
@@ -102,10 +103,57 @@
                             },
                              "sources": {
                                 "type": "array",
-                                "items": {"type": "string"},
-                                "examples": [
-                                  ["https://resources.marine.copernicus.eu/"]
-                                ]
+                                "minItems": 1,
+                                "items": {
+                                    "type": "object",
+                                    "additionalProperties": true,
+                                    "required": [
+                                        "data_url",
+                                        "license_url"
+                                    ],
+                                    "properties": {
+                                        "home_url": {
+                                            "type": "string",
+                                            "format": "uri",
+                                            "examples": [
+                                                ["https://resources.marine.copernicus.eu/"]
+                                            ]
+                                        },
+                                        "data_url": {
+                                            "type": "string",
+                                            "format": "uri",
+                                            "examples": [
+                                                ["https://resources.marine.copernicus.eu/"]
+                                            ]
+                                        },
+                                        "license_url": {
+                                            "type": "string",
+                                            "format": "uri",
+                                            "examples": [
+                                                ["https://marine.copernicus.eu/user-corner/service-commitments-and-licence"]
+                                            ]
+                                        },
+                                        "attributions": {
+                                            "type": "array",
+                                            "items": {"type":  "string"}
+                                        },
+                                        "processing_steps": {
+                                            "type": "array",
+                                            "description": "processing steps to be applied to the source",
+                                            "items": {"type":  "string"},
+                                            "examples": [
+                                                [
+                                                    "Masking out low quality pixels",
+                                                    "Temporal NaN-mean aggregation",
+                                                    "Spatial bi-cubic interpolation"
+                                                ]
+                                            ]
+                                        },
+                                        "remarks": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
