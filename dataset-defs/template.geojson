@@ -19,10 +19,16 @@
                     {
                         "home_url": "https://resources.marine.copernicus.eu/",
                         "data_url": "https://resources.marine.copernicus.eu/",
-                        "remarks": "",
-                        "license": "",
+                        "license_url": "https://marine.copernicus.eu/user-corner/service-commitments-and-licence",
                         "attributions": [],
-                        "processing_steps": []
+                        "processing_steps": [
+                            [
+                                "Masking out low quality pixels",
+                                "Temporal NaN-mean aggregation",
+                                "Spatial bi-cubic interpolation"
+                            ]
+                        ],
+                        "remarks": ""
                     }
                 ]
             }
@@ -36,7 +42,7 @@
                 [36.5, 30],
                 [36.5, 46],
                 [-6.75, 46],
-                [-6.75, 30],
+                [-6.75, 30]
             ]
         ]
     }

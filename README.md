@@ -239,6 +239,6 @@ Zip, e.g. for xarray this is `xarray.open_zarr("./dataset.zarr.zip")`.
 
 ### Dataset Examples
 
-* Global WGS-84: [dataset_global.zarr.zip](data-samples/dataset_global.zarr.zip)
-* Projected CRS: [dataset_utm33n.zarr.zip](data-samples/dataset_utm33n.zarr.zip)
+* Global WGS-84: [dataset_global.zarr.zip](dataset-samples/dataset_global.zarr.zip)
+* Projected CRS: [dataset_utm33n.zarr.zip](dataset-samples/dataset_utm33n.zarr.zip)
 * Satellite Viewing Geometry: _TODO (forman)_
