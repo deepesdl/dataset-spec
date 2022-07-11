@@ -1,0 +1,145 @@
+{
+    "type": "object",
+    "required": [
+        "type",
+        "properties",
+        "geometry"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "type": {
+            "type": "string",
+            "enum": ["Feature"]
+        },
+        "properties": {
+            "type": "object",
+            "required": [
+                "title",
+                "data_id",
+                "time_range",
+                "time_period",
+                "bbox",
+            ],
+            "properties": {
+                "title": {
+                    "type": "string",
+                     "description": "the title of the dataset",
+                    "examples": [
+                        "Ocean Products in the Mediterranean Sea"
+                    ]
+                },
+                "data_id": {
+                    "type": "data_id",
+                    "description": "a unique dataset identifier",
+                    "examples": [
+                        "OC-CMEMS-MED-005-2005-2022-1d-v1.zarr"
+                    ]
+                },
+                "time_range": {
+                    "type": "array",
+                    "items": [
+                        {"type":  "string", "format": "date"},
+                        {"type":  "string", "format": "date"}
+                    ],
+                    "description": "temporal coverage of the data",
+                    "examples": [
+                        ["2005-05-01", "2022-05-01"]
+                    ]
+                },
+                "time_period": {
+                    "type": "string",
+                    "examples": ["1D", "2D", "8D", "10D", "2W", "1M"]
+                },
+                "spatial_ref": {
+                    "type": "string",
+                    "description": "spatial coordinate reference system",
+                    "examples": [
+                        "WGS84", "CRS84", "EPSG:3035", "EPSG:4326"
+                    ],
+                    "default": "CRS84"
+                },
+                "spatial_bbox": {
+                    "type": "array",
+                    "description": "spatial coverage of the data in units of the spatial coordinate reference system",
+                    "items": [
+                        {"type":  "number", "description": "minimum x-coordinate"},
+                        {"type":  "number", "description": "minimum y-coordinate"},
+                        {"type":  "number", "description": "maximum x-coordinate"},
+                        {"type":  "number", "description": "maximum y-coordinate"}
+                    ]
+                },
+                "spatial_res": {
+                    "type": "number",
+                    "description": "spatial resolution in units of the spatial coordinate reference system",
+                    "exclusiveMinimum": 0.0,
+                    "examples": [0.05, 10, 300]
+                },
+                "variables": {
+                    "type": "array",
+                    "description": "the data variables provided by this dataset",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "name",
+                            "long_name",
+                            "units",
+                            "dtype",
+                            "dims"
+                        ],
+                        "properties": {
+                            "name": {"type": "string"},
+                            "long_name": {"type": "string"},
+                            "units": {"type": "string"},
+                            "dtype": {"type": "string"},
+                            "dims": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "examples": [
+                                  ["time", "y", "x"],
+                                  ["time", "lat", "lon"]
+                                ]
+                            },
+                             "sources": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "examples": [
+                                  ["https://resources.marine.copernicus.eu/"]
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "geometry": {
+            "type": "object",
+            "description": "the dataset coverage polygon in CRS-84 (longitude, latitude) units",
+            "required": [
+                "type",
+                "coordinates"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": ["Polygon", "MultiPolygon"]
+                },
+                "coordinates": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": [
+                               {"type": "number"},
+                               {"type": "number"}
+                            ]
+                        },
+                        "minItems": 3
+                    },
+                    "minItems": 1
+                }
+            }
+        }
+    }
+}
