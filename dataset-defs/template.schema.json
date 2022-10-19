@@ -18,7 +18,10 @@
                 "data_id",
                 "time_range",
                 "time_period",
-                "bbox"
+                "spatial_ref",
+                "spatial_bbox",
+                "spatial_res",
+                "variables"
             ],
             "properties": {
                 "title": {
@@ -77,6 +80,7 @@
                 "variables": {
                     "type": "array",
                     "description": "the data variables provided by this dataset",
+                    "minItems": 1,
                     "items": {
                         "type": "object",
                         "additionalProperties": false,
