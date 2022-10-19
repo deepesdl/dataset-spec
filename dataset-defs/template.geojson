@@ -6,9 +6,9 @@
         "data_id": "OC-CMEMS-MED-005-2005-2022-1d-v1",
         "time_range": ["2005-05-01", "2022-05-01"],
         "time_period": "1D",
-        "bbox": [-6.75, 30, 36.5, 46],
-        "spatial_res": 0.05,
         "spatial_ref": "CRS84",
+        "spatial_bbox": [-6.75, 30, 36.5, 46],
+        "spatial_res": 0.05,
         "variables": [
             {
                 "name": "CHL",
