@@ -183,9 +183,9 @@ attributes `scaling_factor` (default is 1) and `add_offset` (with default 0).
 
 ### Multi-Band Products
 
-Individual bands of a dataset should be stored as variables. This is also the 
-case for multi-band products, like Sentinel-2, where each wavelength will be 
-represented by a separate variable, `B01`, `B02`, etc.
+Individual spectral bands of a dataset should be stored as variables. For example, 
+this is the case for multi-band products, like Sentinel-2, where each wavelength 
+will be represented by a separate variable named `B01`, `B02`, etc.
 
 ### Metadata Consolidation
 
