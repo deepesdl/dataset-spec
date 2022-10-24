@@ -101,11 +101,17 @@
                             "units": {"type": "string"},
                             "valid_min": {"type": "number"},
                             "valid_max": {"type": "number"},
-                            "time_range": {"type": "array",
-                                           "items": {"type": "string"},
-                                           "examples": [
-                                                    ["time-start", "time-end"]]
-                                           },
+                            "time_range": {
+                                           "type": "array",
+                                           "items": [
+                                                       {"type":  "string", "format": "date"},
+                                                       {"type":  "string", "format": "date"}
+                                                    ],
+                                                    "description": "temporal coverage of the data",
+                                                    "examples": [
+                                                        ["2005-05-01", "2022-05-01"]
+                                                    ]
+                                                },
                             "dtype": {"type": "string"},
                             "dims": {
                                 "type": "array",
