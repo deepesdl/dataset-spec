@@ -17,7 +17,7 @@
                 "dtype": "float32",
                 "valid_min": 0.0,
                 "valid_max": 0.2,
-                "color_bar_name": "YlGn"
+                "color_bar_name": "YlGn",
                 "time_range": ["2005-05-01", "2022-05-01"],
                 "sources": [
                     {
