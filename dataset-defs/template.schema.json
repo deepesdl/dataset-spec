@@ -32,7 +32,7 @@
                     ]
                 },
                 "data_id": {
-                    "type": "data_id",
+                    "type": "string",
                     "description": "a unique dataset identifier",
                     "examples": [
                         "OC-CMEMS-MED-005-2005-2022-1d-v1.zarr"
