@@ -1,4 +1,4 @@
-# DeepESDL Dataset Specification
+# DeepESDL Dataset Convention
 
 Version 1.0 Draft, 2022-07-05
 
