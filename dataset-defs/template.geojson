@@ -19,6 +19,7 @@
                 "valid_max": 1000.0,
                 "color_bar_name": "YlGn",
                 "time_range": ["2005-05-01", "2022-05-01"],
+                "dims": ["time", "lat", "lon"],
                 "sources": [
                     {
                         "home_url": "https://resources.marine.copernicus.eu/",
@@ -26,11 +27,9 @@
                         "license_url": "https://marine.copernicus.eu/user-corner/service-commitments-and-licence",
                         "attributions": [],
                         "processing_steps": [
-                            [
                                 "Masking out low quality pixels",
                                 "Temporal NaN-mean aggregation",
                                 "Spatial bi-cubic interpolation"
-                            ]
                         ],
                         "remarks": ""
                     }
