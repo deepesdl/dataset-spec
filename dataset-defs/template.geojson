@@ -15,6 +15,10 @@
                 "units": "mg/m^3",
                 "long_name": "Chlorophyll Concentration",
                 "dtype": "float32",
+                "valid_min": 0.0,
+                "valid_max": 1000.0,
+                "color_bar_name": "YlGn",
+                "time_range": ["2005-05-01", "2022-05-01"],
                 "sources": [
                     {
                         "home_url": "https://resources.marine.copernicus.eu/",
@@ -30,7 +34,15 @@
                         ],
                         "remarks": ""
                     }
+                ],
+                "metadata": [
+                    {
+                        "description": "...",
+                        "...": "..."
+                    }
+
                 ]
+
             }
         ]
     },
