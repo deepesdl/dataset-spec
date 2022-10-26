@@ -214,15 +214,13 @@
                              },
                              "color_value_min": {
                                  "type": "number",
-                                 "examples": [
-                                     [-10500, 0, 1.735e-9, 4.5e6]
-                                 ]
+                                 "description": "minimum value for colour scale",
+                                 "examples": [-10500, 0, 1.735e-9, 4.5e6]
                              },
                              "color_value_max": {
                                  "type": "number",
-                                 "examples": [
-                                     [-9500, 0, 2.978e-9, 8.5e6]
-                                 ]
+                                 "description": "maximum value for colour scale",
+                                 "examples": [-9500, 0, 2.978e-9, 8.5e6]
                              },
                              "metadata": {
                                  "type": "object"
