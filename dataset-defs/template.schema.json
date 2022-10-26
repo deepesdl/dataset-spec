@@ -207,8 +207,21 @@
                              },
                              "color_bar_name": {
                                  "type": "string",
+                                 "description": "name of a matplotlib colormap: https://matplotlib.org/stable/tutorials/colors/colormaps.html",
                                  "examples": [
-                                     ["title of a matplotlib colorbar: https://matplotlib.org/stable/tutorials/colors/colormaps.html"]
+                                     ["viridis_r", "turbo", "prism", "Spectral"]
+                                 ]
+                             },
+                             "color_value_min": {
+                                 "type": "number",
+                                 "examples": [
+                                     [-10500, 0, 1.735e-9, 4.5e6]
+                                 ]
+                             },
+                             "color_value_max": {
+                                 "type": "number",
+                                 "examples": [
+                                     [-9500, 0, 2.978e-9, 8.5e6]
                                  ]
                              },
                              "metadata": {
