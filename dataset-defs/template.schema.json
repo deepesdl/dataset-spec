@@ -102,16 +102,16 @@
                             "valid_min": {"type": "number"},
                             "valid_max": {"type": "number"},
                             "time_range": {
-                                           "type": "array",
-                                           "items": [
-                                                       {"type":  "string", "format": "date"},
-                                                       {"type":  "string", "format": "date"}
-                                                    ],
-                                                    "description": "temporal coverage of the data",
-                                                    "examples": [
-                                                        ["2005-05-01", "2022-05-01"]
-                                                    ]
-                                                },
+                                "type": "array",
+                                "items": [
+                                            {"type":  "string", "format": "date"},
+                                            {"type":  "string", "format": "date"}
+                                         ],
+                                         "description": "temporal coverage of the data",
+                                         "examples": [
+                                             ["2005-05-01", "2022-05-01"]
+                                         ]
+                                     },
                             "dtype": {"type": "string"},
                             "dims": {
                                 "type": "array",
@@ -175,11 +175,12 @@
                                     }
                                 }
                              },
-                             "color_bar_name": {"type": "string",
-                                                "examples": [
-                                                ["title of a matplotlib colorbar: https://matplotlib.org/stable/tutorials/colors/colormaps.html"]
-                                                 ]
-                                                },
+                             "color_bar_name": {
+                                 "type": "string",
+                                 "examples": [
+                                     ["title of a matplotlib colorbar: https://matplotlib.org/stable/tutorials/colors/colormaps.html"]
+                                 ]
+                             },
                              "metadata": {
                                  "type": "array",
                                  "minItems": 1

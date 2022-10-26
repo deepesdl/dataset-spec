@@ -27,9 +27,9 @@
                         "license_url": "https://marine.copernicus.eu/user-corner/service-commitments-and-licence",
                         "attributions": [],
                         "processing_steps": [
-                                "Masking out low quality pixels",
-                                "Temporal NaN-mean aggregation",
-                                "Spatial bi-cubic interpolation"
+                            "Masking out low quality pixels",
+                            "Temporal NaN-mean aggregation",
+                            "Spatial bi-cubic interpolation"
                         ],
                         "remarks": ""
                     }
@@ -39,9 +39,7 @@
                         "description": "...",
                         "...": "..."
                     }
-
                 ]
-
             }
         ]
     },
