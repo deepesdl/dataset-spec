@@ -23,6 +23,7 @@
                 "spatial_res",
                 "variables"
             ],
+            "additionalProperties": false,
             "properties": {
                 "title": {
                     "type": "string",
@@ -76,6 +77,9 @@
                     "description": "spatial resolution in units of the spatial coordinate reference system",
                     "exclusiveMinimum": 0.0,
                     "examples": [0.05, 10, 300]
+                },
+                "metadata": {
+                    "type": "object"
                 },
                 "variables": {
                     "type": "array",
@@ -182,9 +186,8 @@
                                  ]
                              },
                              "metadata": {
-                                 "type": "array",
-                                 "minItems": 1
-                                }
+                                 "type": "object"
+                            }
                         }
                     }
                 }
