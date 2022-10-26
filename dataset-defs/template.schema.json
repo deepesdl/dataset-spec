@@ -17,6 +17,7 @@
             "required": [
                 "title",
                 "data_id",
+                "description",
                 "time_range",
                 "time_period",
                 "spatial_ref",
@@ -28,7 +29,7 @@
             "properties": {
                 "title": {
                     "type": "string",
-                     "description": "the title of the dataset",
+                    "description": "the title of the dataset",
                     "examples": [
                         "Ocean Products in the Mediterranean Sea"
                     ]
@@ -38,6 +39,13 @@
                     "description": "a unique dataset identifier",
                     "examples": [
                         "OC-CMEMS-MED-005-2005-2022-1d-v1.zarr"
+                    ]
+                },
+                "description": {
+                    "type": "string",
+                    "description": "a description of the dataset",
+                    "examples": [
+                        "CMEMS Ocean Colour for Mediterranean Sea, 2005-2022"
                     ]
                 },
                 "time_range": {

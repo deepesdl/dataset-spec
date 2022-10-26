@@ -3,13 +3,15 @@
     "properties": {
         "title": "Ocean Color Products in the Mediterranean Sea",
         "data_id": "OC-CMEMS-MED-005-2005-2022-1d-v1",
+        "description": "CMEMS Ocean Colour for Mediterranean Sea, 2005-2022",
         "time_range": ["2005-05-01", "2022-05-01"],
         "time_period": "1D",
         "spatial_ref": "CRS84",
         "spatial_bbox": [-6.75, 30, 36.5, 46],
         "spatial_res": 0.05,
         "metadata": {
-            "description": "..."
+            "published_on": "2022-10-26",
+            "keywords": ["mediterranean", "ocean colour", "chlorophyll"]
         },
         "variables": [
             {
@@ -37,8 +39,8 @@
                     }
                 ],
                 "metadata": {
-                    "description": "...",
-                    "...": "..."
+                    "keywords": ["colour", "marine", "chlorophyll"],
+                    "processing-level": "L4"
                 }
             }
         ]
