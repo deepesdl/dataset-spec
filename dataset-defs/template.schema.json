@@ -1,4 +1,5 @@
 {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "required": [
         "type",
@@ -41,10 +42,11 @@
                 },
                 "time_range": {
                     "type": "array",
-                    "items": [
+                    "prefixItems": [
                         {"type":  "string", "format": "date"},
                         {"type":  "string", "format": "date"}
                     ],
+                    "items": false,
                     "description": "temporal coverage of the data",
                     "examples": [
                         ["2005-05-01", "2022-05-01"]
@@ -65,17 +67,32 @@
                 "spatial_bbox": {
                     "type": "array",
                     "description": "spatial coverage of the data in units of the spatial coordinate reference system",
-                    "items": [
+                    "prefixItems": [
                         {"type":  "number", "description": "minimum x-coordinate"},
                         {"type":  "number", "description": "minimum y-coordinate"},
                         {"type":  "number", "description": "maximum x-coordinate"},
                         {"type":  "number", "description": "maximum y-coordinate"}
-                    ]
+                    ],
+                    "items": false
                 },
                 "spatial_res": {
-                    "type": "number",
-                    "description": "spatial resolution in units of the spatial coordinate reference system",
+                    "type": [
+                        "array",
+                        "number"
+                    ],
+                    "prefixItems": [
+                        {
+                            "type": "number",
+                            "exclusiveMinimum": 0.0
+                        },
+                        {
+                            "type": "number",
+                            "exclusiveMinimum": 0.0
+                        }
+                    ],
+                    "items": false,
                     "exclusiveMinimum": 0.0,
+                    "description": "spatial resolution in units of the spatial coordinate reference system",
                     "examples": [0.05, 10, 300]
                 },
                 "metadata": {
@@ -107,15 +124,16 @@
                             "valid_max": {"type": "number"},
                             "time_range": {
                                 "type": "array",
-                                "items": [
+                                "prefixItems": [
                                             {"type":  "string", "format": "date"},
                                             {"type":  "string", "format": "date"}
                                          ],
                                          "description": "temporal coverage of the data",
                                          "examples": [
                                              ["2005-05-01", "2022-05-01"]
-                                         ]
-                                     },
+                                         ],
+                                "items": false
+                            },
                             "dtype": {"type": "string"},
                             "dims": {
                                 "type": "array",
@@ -211,10 +229,11 @@
                         "type": "array",
                         "items": {
                             "type": "array",
-                            "items": [
+                            "prefixItems": [
                                {"type": "number"},
                                {"type": "number"}
-                            ]
+                            ],
+                            "items": false
                         },
                         "minItems": 3
                     },
