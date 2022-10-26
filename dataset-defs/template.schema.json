@@ -133,13 +133,13 @@
                             "time_range": {
                                 "type": "array",
                                 "prefixItems": [
-                                            {"type":  "string", "format": "date"},
-                                            {"type":  "string", "format": "date"}
-                                         ],
-                                         "description": "temporal coverage of the data",
-                                         "examples": [
-                                             ["2005-05-01", "2022-05-01"]
-                                         ],
+                                    {"type":  "string", "format": "date"},
+                                    {"type":  "string", "format": "date"}
+                                ],
+                                "description": "temporal coverage of the data",
+                                "examples": [
+                                    ["2005-05-01", "2022-05-01"]
+                                ],
                                 "items": false
                             },
                             "dtype": {"type": "string"},
