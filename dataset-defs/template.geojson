@@ -2,13 +2,17 @@
     "type": "Feature",
     "properties": {
         "title": "Ocean Color Products in the Mediterranean Sea",
-        "description": "...",
         "data_id": "OC-CMEMS-MED-005-2005-2022-1d-v1",
+        "description": "CMEMS Ocean Colour for Mediterranean Sea, 2005-2022",
         "time_range": ["2005-05-01", "2022-05-01"],
         "time_period": "1D",
         "spatial_ref": "CRS84",
         "spatial_bbox": [-6.75, 30, 36.5, 46],
         "spatial_res": 0.05,
+        "metadata": {
+            "published_on": "2022-10-26",
+            "keywords": ["mediterranean", "ocean colour", "chlorophyll"]
+        },
         "variables": [
             {
                 "name": "CHL",
@@ -19,6 +23,7 @@
                 "valid_max": 1000.0,
                 "color_bar_name": "YlGn",
                 "time_range": ["2005-05-01", "2022-05-01"],
+                "dims": ["time", "lat", "lon"],
                 "sources": [
                     {
                         "home_url": "https://resources.marine.copernicus.eu/",
@@ -26,23 +31,17 @@
                         "license_url": "https://marine.copernicus.eu/user-corner/service-commitments-and-licence",
                         "attributions": [],
                         "processing_steps": [
-                            [
-                                "Masking out low quality pixels",
-                                "Temporal NaN-mean aggregation",
-                                "Spatial bi-cubic interpolation"
-                            ]
+                            "Masking out low quality pixels",
+                            "Temporal NaN-mean aggregation",
+                            "Spatial bi-cubic interpolation"
                         ],
                         "remarks": ""
                     }
                 ],
-                "metadata": [
-                    {
-                        "description": "...",
-                        "...": "..."
-                    }
-
-                ]
-
+                "metadata": {
+                    "keywords": ["colour", "marine", "chlorophyll"],
+                    "processing-level": "L4"
+                }
             }
         ]
     },
