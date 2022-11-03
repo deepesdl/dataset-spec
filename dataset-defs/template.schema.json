@@ -151,7 +151,19 @@
                                   ["time", "lat", "lon"]
                                 ]
                             },
-                             "sources": {
+                            "processing_steps": {
+                                "type": "array",
+                                "description": "processing steps to be applied to the source",
+                                "items": {"type":  "string"},
+                                "examples": [
+                                    [
+                                        "Masking out low quality pixels",
+                                        "Temporal NaN-mean aggregation",
+                                        "Spatial bi-cubic interpolation"
+                                    ]
+                                ]
+                            },
+                            "sources": {
                                 "type": "array",
                                 "minItems": 1,
                                 "items": {
