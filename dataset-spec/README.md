@@ -35,7 +35,7 @@ Note that GeoJSON signature can also be provided using the YAML format.
 
 A dataset specification refers to GeoJON *feature*. 
 
-## GeoJSON geometry
+### GeoJSON geometry
 
 The feature's *geometry* provides the geographic boundaries
 or extent of the data cube. According to GeoJSON, the geometry must be 
