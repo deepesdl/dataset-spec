@@ -184,7 +184,7 @@ we want a defined way to display image tiles:
     ...,          
     "color_bar_name": "YlGn",
     "color_value_min": 
-    "color_value_max": 
+    "color_value_max": 150
     
     "color_value_mapping": {
          0: "red",
