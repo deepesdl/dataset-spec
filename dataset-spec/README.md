@@ -10,6 +10,8 @@ A DeepESDL dataset specification defines for each data cube to be generated
 * spatio-temporal resolution;
 * spatio-temporal coverage;
 * its data variables;
+* list the data sources;
+* list the processing steps;
 * arbitrary metadata.
  
 And for each of its data variables
@@ -17,9 +19,8 @@ And for each of its data variables
 * name and description;
 * units;
 * visualisation info;
-* list the data sources;
-* list the processing steps;
 * arbitrary metadata.
+
 
 ## GeoJSON
 
@@ -162,17 +163,29 @@ data cube:
 | dtype      | string             |   Y   | Numpy-compatible data type name.                        | `float32"`                     |
 | dims       | string[]           |   Y   | Array of dimension names.                               | `["time", "lat", "lon"]"`      |
 | units      | string &#124; null |   Y   | Physical unit.                                          | `"mg/m^3"`, `"n.a."`           |
-| fill_value | string &#124; null |   Y   | Unscaled values equal to `fill_value` are undefined.    | `1.0`                          |
-| valid_min  | string             |   N   | Values below that number are undefined.                 | `0.0`                          |
-| valid_max  | string             |   N   | Values above that number are undefined.                 | `1.0`                          |
+| fill_value | number &#124; null |   N   | Unscaled values equal to `fill_value` are undefined.    | 1.0                            |
+| valid_min  | number             |   N   | Values below that number are undefined.                 | 0.0                            |
+| valid_max  | number             |   N   | Values above that number are undefined.                 | 1.0                            |
 | time_range | [string, string]   |   N   | Provided time range. Values out of range are undefined. | `["2005-05-01", "2022-05-01"]` |
 | metadata   | object             |   N   | Arbitrary metadata.                                     | See below                      |
 
+A variable's `name` should be a character string that starts with a
+letter and should be continued either by letters, digits, or the underscore
+(`_`) character. Spaces (' '), hyphens (`-`), and other characters should be 
+avoided.
 
-`units` and `fill_value` must be given for floating point data, otherwise
-they should be set to `null`.
+If `fill_value` is missing or `null` and `dtype` is a floating point data, 
+`NaN` is assumed.
 
-`time_range` defaults to the dataset's `time_range`.
+`units` should not be specified or set to set to `null` for data that has 
+no units, e.g., categorical data. 
+
+`time_range` defaults to the dataset's `time_range`. It should not be
+specified for variables that have no "time" dimension.
+
+If `valid_min`, `valid_max` are given, their values should be numbers, 
+not `null`. Same applies to the value items of `valid_range`. 
+
 
 #### Data Variable - Metadata
 
@@ -185,13 +198,10 @@ we want a defined way to display image tiles:
     "color_bar_name": "YlGn",
     "color_value_min": 0.5
     "color_value_max": 150
-    
-    "color_value_mapping": {
-         0: "red",
-         1: "yellow",
-         ...
-    }
 ```
+
+If `color_value_min`, `color_value_max` are given, their values should 
+be numbers, not `null`.
 
 The following variable `metadata` example comprises 
 typical optional properties: 
@@ -225,16 +235,24 @@ open parameters passed to the given data store.
 
 The following properties describe access to an arbitrary data source:
 
-| Property            | Type    | Req.? | Description                                                                      | Example                          |
-|---------------------|---------|:-----:|----------------------------------------------------------------------------------|----------------------------------|
-| name                | string  |   Y   | Human-readable title of this data source.                                        |                                  |
-| variable_names      | string  |   Y   | Array of variable names provided by this data store.                             |                                  |
-| download_url        | string  |   Y   | Download URL template.                                                           |                                  |
-| protocol            | string  |   N   | Transport protocol. Detected from `download_url`, if omitted.                    | `"http"`, `"ftp"`                |
-| compressed          | boolean |   N   | Whether data is compressed. Defaults to `false`. Detected from data, if omitted. |                                  |
-| compression_format  | string  |   N   | Compression format in use. . Detected from data, if omitted.                     |                                  |
-| source_format       | string  |   N   | Source format name. Detected from filename, if omitted.                          | `"netcdf"`, `"hdf"`, `"geotiff"` |
-| source_crs          | string  |   N   | Coordinate reference system of source data. Detected from data, if omitted.      |                                  |
+| Property           | Type    | Req.? | Description                                                                      | Examples                         |
+|--------------------|---------|:-----:|----------------------------------------------------------------------------------|----------------------------------|
+| name               | string  |   Y   | Human-readable title of this data source.                                        |                                  |
+| variables          | object  |   Y   | Mapping of variable names to _variable sources_.                                 |                                  |
+| download_url       | string  |   Y   | Download URL template.                                                           |                                  |
+| protocol           | string  |   N   | Transport protocol. Detected from `download_url`, if omitted.                    | `"http"`, `"ftp"`                |
+| compressed         | boolean |   N   | Whether data is compressed. Defaults to `false`. Detected from data, if omitted. |                                  |
+| compression_format | string  |   N   | Compression format in use. . Detected from data, if omitted.                     |                                  |
+| source_format      | string  |   N   | Source format name. Detected from filename, if omitted.                          | `"netcdf"`, `"hdf"`, `"geotiff"` |
+| source_crs         | string  |   N   | Coordinate reference system of source data. Detected from data, if omitted.      |                                  |
+
+`variables` is an object where the keys are variable names defined by the 
+specified data cube and the values define the variable source. 
+Currently, a variable source only comprises the variable's original name.
+
+| Property      | Type    | Req.? | Description                                              | Example     |
+|---------------|---------|:-----:|----------------------------------------------------------|-------------|
+| original_name | string  |   N   | The original name of the variable in its source dataset. | `"Thw 142"` |
 
 
 ## Cube Generation Recipe
