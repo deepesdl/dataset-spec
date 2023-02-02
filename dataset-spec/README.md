@@ -169,7 +169,7 @@ data cube:
 | metadata   | object             |   N   | Arbitrary metadata.                                     | See below                      |
 
 
-`units` and `fill_value` mist be given for floating point data, otherwise
+`units` and `fill_value` must be given for floating point data, otherwise
 they should be set to `null`.
 
 `time_range` defaults to the dataset's `time_range`.
