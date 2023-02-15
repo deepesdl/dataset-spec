@@ -177,8 +177,7 @@
                             "valid_max",
                             "time_range",
                             "dtype",
-                            "dims",
-                            "sources"
+                            "dims"
                         ],
                         "properties": {
                             "name": {"type": "string"},
@@ -220,66 +219,12 @@
                                     ]
                                 ]
                             },
-                            "sources": {
-                                "type": "array",
-                                "minItems": 1,
-                                "items": {
-                                    "type": "object",
-                                    "additionalProperties": true,
-                                    "required": [
-                                        "data_url",
-                                        "license_url"
-                                    ],
-                                    "properties": {
-                                        "home_url": {
-                                            "type": "string",
-                                            "format": "uri",
-                                            "examples": [
-                                                ["https://resources.marine.copernicus.eu/"]
-                                            ]
-                                        },
-                                        "data_url": {
-                                            "type": "string",
-                                            "format": "uri",
-                                            "examples": [
-                                                ["https://resources.marine.copernicus.eu/"]
-                                            ]
-                                        },
-                                        "license_url": {
-                                            "type": "string",
-                                            "format": "uri",
-                                            "examples": [
-                                                ["https://marine.copernicus.eu/user-corner/service-commitments-and-licence"]
-                                            ]
-                                        },
-                                        "attributions": {
-                                            "type": "array",
-                                            "items": {"type":  "string"}
-                                        },
-                                        "processing_steps": {
-                                            "type": "array",
-                                            "description": "processing steps to be applied to the source",
-                                            "items": {"type":  "string"},
-                                            "examples": [
-                                                [
-                                                    "Masking out low quality pixels",
-                                                    "Temporal NaN-mean aggregation",
-                                                    "Spatial bi-cubic interpolation"
-                                                ]
-                                            ]
-                                        },
-                                        "remarks": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                             },
-                             "color_bar_name": {
-                                 "type": "string",
-                                 "description": "name of a matplotlib colormap: https://matplotlib.org/stable/tutorials/colors/colormaps.html",
-                                 "examples": [
-                                     ["viridis_r", "turbo", "prism", "Spectral"]
-                                 ]
+                            "color_bar_name": {
+                                "type": "string",
+                                "description": "name of a matplotlib colormap: https://matplotlib.org/stable/tutorials/colors/colormaps.html",
+                                "examples": [
+                                    ["viridis_r", "turbo", "prism", "Spectral"]
+                                ]
                              },
                              "color_value_min": {
                                  "type": "number",
