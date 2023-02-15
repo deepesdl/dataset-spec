@@ -183,7 +183,17 @@
                         "properties": {
                             "name": {"type": "string"},
                             "long_name": {"type": "string"},
+                            "dtype": {"type": "string"},
+                            "dims": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "examples": [
+                                  ["time", "y", "x"],
+                                  ["time", "lat", "lon"]
+                                ]
+                            },
                             "units": {"type": "string"},
+                            "fill_value": {"type": "number"},
                             "valid_min": {"type": "number"},
                             "valid_max": {"type": "number"},
                             "time_range": {
@@ -197,15 +207,6 @@
                                     ["2005-05-01", "2022-05-01"]
                                 ],
                                 "items": false
-                            },
-                            "dtype": {"type": "string"},
-                            "dims": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                                "examples": [
-                                  ["time", "y", "x"],
-                                  ["time", "lat", "lon"]
-                                ]
                             },
                             "processing_steps": {
                                 "type": "array",
@@ -321,7 +322,7 @@
                                 "type": "object"
                             },
                             "variable_open_params": {
-                                "type": "number"
+                                "type": "object"
                             },
                             "variables": {},
                             "download_url": {},
