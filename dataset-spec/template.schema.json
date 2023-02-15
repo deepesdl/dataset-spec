@@ -172,12 +172,9 @@
                         "required": [
                             "name",
                             "long_name",
-                            "units",
-                            "valid_min",
-                            "valid_max",
-                            "time_range",
                             "dtype",
-                            "dims"
+                            "dims",
+                            "units"
                         ],
                         "properties": {
                             "name": {"type": "string"},
@@ -219,25 +216,47 @@
                                     ]
                                 ]
                             },
-                            "color_bar_name": {
-                                "type": "string",
-                                "description": "name of a matplotlib colormap: https://matplotlib.org/stable/tutorials/colors/colormaps.html",
-                                "examples": [
-                                    ["viridis_r", "turbo", "prism", "Spectral"]
-                                ]
-                             },
-                             "color_value_min": {
-                                 "type": "number",
-                                 "description": "minimum value for colour scale",
-                                 "examples": [-10500, 0, 1.735e-9, 4.5e6]
-                             },
-                             "color_value_max": {
-                                 "type": "number",
-                                 "description": "maximum value for colour scale",
-                                 "examples": [-9500, 0, 2.978e-9, 8.5e6]
-                             },
-                             "metadata": {
-                                 "type": "object"
+                            "metadata": {
+                                "type": "object",
+                                "required": [
+                                    "color_bar_name",
+                                    "color_value_min",
+                                    "color_value_max"
+                                ],
+                                "properties": {
+                                    "color_bar_name": {
+                                        "type": "string",
+                                        "description": "name of a matplotlib colormap: https://matplotlib.org/stable/tutorials/colors/colormaps.html",
+                                        "examples": [
+                                            [
+                                                "viridis_r",
+                                                "turbo",
+                                                "prism",
+                                                "Spectral"
+                                            ]
+                                        ]
+                                    },
+                                    "color_value_min": {
+                                        "type": "number",
+                                        "description": "minimum value for colour scale",
+                                        "examples": [
+                                            -10500,
+                                            0,
+                                            1.735e-9,
+                                            4.5e6
+                                        ]
+                                    },
+                                    "color_value_max": {
+                                        "type": "number",
+                                        "description": "maximum value for colour scale",
+                                        "examples": [
+                                            -9500,
+                                            0,
+                                            2.978e-9,
+                                            8.5e6
+                                        ]
+                                    }
+                                }
                             }
                         }
                     }
