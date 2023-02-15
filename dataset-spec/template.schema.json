@@ -15,38 +15,67 @@
         "properties": {
             "type": "object",
             "required": [
-                "title",
                 "data_id",
+                "title",
                 "description",
-                "time_range",
-                "time_period",
-                "spatial_ref",
-                "spatial_bbox",
-                "spatial_res",
-                "variables"
+                "version",
+                "license",
+                "variables",
+                "sources"
             ],
             "additionalProperties": false,
             "properties": {
+                "data_id": {
+                    "type": "string",
+                    "description": "unique identification string, filename base",
+                    "examples": [
+                        "OC-CMEMS-MED-005-2005-2022-1d-v1"
+                    ]
+                },
                 "title": {
                     "type": "string",
-                    "description": "the title of the dataset",
+                    "description": "human-readable title of the dataset",
                     "examples": [
                         "Ocean Products in the Mediterranean Sea"
                     ]
                 },
-                "data_id": {
-                    "type": "string",
-                    "description": "a unique dataset identifier",
-                    "examples": [
-                        "OC-CMEMS-MED-005-2005-2022-1d-v1.zarr"
-                    ]
-                },
                 "description": {
                     "type": "string",
-                    "description": "a description of the dataset",
+                    "description": "human-readable description of the dataset",
                     "examples": [
                         "CMEMS Ocean Colour for Mediterranean Sea, 2005-2022"
                     ]
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Version string. Semver format recommended.",
+                    "examples": [
+                        "1.0.3"
+                    ]
+                },
+                "recipe": {
+                    "type": "string",
+                    "description": "URL to repo recipe directory",
+                    "examples": [
+                        "https://example.com/recipe/"
+                    ]
+                },
+                "changes": {
+                    "type": "string",
+                    "description": "URL to CHANGES.md in recipe directory",
+                    "examples": [
+                        "https://example.com/recipe/CHANGES.md"
+                    ]
+                },
+                "license": {
+                    "type": "string",
+                    "description": "URL to CHANGES.md in recipe directory",
+                    "examples": [
+                        "https://example.com/recipe/CHANGES.md"
+                    ]
+                },
+                "metadata": {
+                    "type": "object"
                 },
                 "time_range": {
                     "type": "array",
@@ -61,7 +90,7 @@
                     ]
                 },
                 "time_period": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "examples": ["1D", "2D", "8D", "10D", "2W", "1M"]
                 },
                 "spatial_ref": {
@@ -103,8 +132,35 @@
                     "description": "spatial resolution in units of the spatial coordinate reference system",
                     "examples": [0.05, 10, 300]
                 },
-                "metadata": {
-                    "type": "object"
+                "spatial_size": {
+                    "type": ["array"],
+                    "prefixItems": [
+                        {
+                            "type": "integer",
+                            "exclusiveMinimum": 0
+                        },
+                        {
+                            "type": "integer",
+                            "exclusiveMinimum": 0
+                        }
+                    ],
+                    "items": false,
+                    "description": "the spatial image size as [width, height] in pixels",
+                    "examples": [[6000, 3000], [256, 256]]
+                },
+                "spatial_offset": {
+                    "type": ["array"],
+                    "prefixItems": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "items": false,
+                    "description": "Offset coordinates in units of the CRS",
+                    "examples": [[-180, -90], [0, 0]]
                 },
                 "variables": {
                     "type": "array",
@@ -236,6 +292,55 @@
                              },
                              "metadata": {
                                  "type": "object"
+                            }
+                        }
+                    }
+                },
+                "sources": {
+                    "type": "array",
+                    "description": "Array of data source definitions",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                            "name",
+                            "variable_names",
+                            "store_id"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "variable_names": {
+                                "type": "array"
+                            },
+                            "store_id": {
+                                "type": "string"
+                            },
+                            "store_params": {
+                                "type": "object"
+                            },
+                            "variable_open_params": {
+                                "type": "number"
+                            },
+                            "variables": {},
+                            "download_url": {},
+                            "protocol": {
+                                "type": "string",
+                                "examples": ["http", "ftp"]
+                            },
+                            "compressed": {
+                                "type": "boolean"
+                            },
+                            "compression_format": {
+                                "type": "string"
+                            },
+                            "source_format": {
+                                "type": "string",
+                                "examples": ["netcdf", "hdf", "geotiff"]
+                            },
+                            "source_crs": {
+                                "type": "string"
                             }
                         }
                     }
