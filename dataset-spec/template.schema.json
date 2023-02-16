@@ -187,7 +187,7 @@
                                   ["time", "lat", "lon"]
                                 ]
                             },
-                            "units": {"type": "string"},
+                            "units": {"type": ["string", "null"]},
                             "fill_value": {"type": "number"},
                             "valid_min": {"type": "number"},
                             "valid_max": {"type": "number"},

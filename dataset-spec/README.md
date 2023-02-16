@@ -158,11 +158,11 @@ data cube:
 
 | Property   | Type               | Req.? | Description                                             | Example                        |
 |------------|--------------------|:-----:|---------------------------------------------------------|--------------------------------|
-| name       | string             |   Y   | Array of variable definitions.                          | `"CHL"`                        |
-| long_name  | string             |   Y   | Array of variable definitions.                          | `"Chlorophyll Concentration"`  |
+| name       | string             |   Y   | Name of the variable in the dataset.                    | `"CHL"`                        |
+| long_name  | string             |   Y   | Descriptive name of variable, per CF conventions.       | `"Chlorophyll Concentration"`  |
 | dtype      | string             |   Y   | Numpy-compatible data type name.                        | `float32"`                     |
 | dims       | string[]           |   Y   | Array of dimension names.                               | `["time", "lat", "lon"]"`      |
-| units      | string &#124; null |   N   | Physical unit.                                          | `"mg/m^3"`, `"n.a."`           |
+| units      | string &#124; null |   Y   | Physical unit (null if not applicable).                 | `"mg/m^3"`, `"n.a."`           |
 | fill_value | number &#124; null |   N   | Unscaled values equal to `fill_value` are undefined.    | 1.0                            |
 | valid_min  | number             |   N   | Values below that number are undefined.                 | 0.0                            |
 | valid_max  | number             |   N   | Values above that number are undefined.                 | 1.0                            |
@@ -174,11 +174,18 @@ letter and should be continued either by letters, digits, or the underscore
 (`_`) character. Spaces (' '), hyphens (`-`), and other characters should be 
 avoided.
 
+The `long_name` corresponds to the [`long_name` attribute](https://cfconventions.org/Data/cf-conventions/cf-conventions-1.10/cf-conventions.html#long-name)
+defined in the Climate and Forecast (CF) Metadata Conventions, where it is
+described as ‘a long descriptive name which may, for example, be used for
+labeling plots.’
+
 If `fill_value` is missing or `null` and `dtype` is a floating point data, 
 `NaN` is assumed.
 
-`units` should not be specified or set to set to `null` for data that has 
-no units, e.g., categorical data. 
+`units` is required despite not always being applicable, in order to reduce the
+risk of its omission in cases where is *is* applicable.
+For data that has no units (e.g. categorical data), `units` should be set to
+`null`.
 
 `time_range` defaults to the dataset's `time_range`. It should not be
 specified for variables that have no "time" dimension.
