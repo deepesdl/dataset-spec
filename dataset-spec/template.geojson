@@ -1,49 +1,78 @@
 {
     "type": "Feature",
     "properties": {
-        "title": "Ocean Color Products in the Mediterranean Sea",
         "data_id": "OC-CMEMS-MED-005-2005-2022-1d-v1",
+        "title": "Ocean Color Products in the Mediterranean Sea",
         "description": "CMEMS Ocean Colour for Mediterranean Sea, 2005-2022",
-        "time_range": ["2005-05-01", "2022-05-01"],
-        "time_period": "1D",
-        "spatial_ref": "CRS84",
-        "spatial_bbox": [-6.75, 30, 36.5, 46],
-        "spatial_res": 0.05,
-        "metadata": {
-            "published_on": "2022-10-26",
-            "keywords": ["mediterranean", "ocean colour", "chlorophyll"]
-        },
+        "version": "1.0.3",
+        "recipe": "https://example.com/recipe/",
+        "changes": "https://example.com/recipe/CHANGES.md",
+        "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
         "variables": [
             {
                 "name": "CHL",
-                "units": "mg/m^3",
                 "long_name": "Chlorophyll Concentration",
                 "dtype": "float32",
+                "dims": ["time", "lat", "lon"],
+                "units": "mg/m^3",
+                "fill_value": -1.0,
                 "valid_min": 0.0,
                 "valid_max": 1000.0,
-                "color_bar_name": "YlGn",
                 "time_range": ["2005-05-01", "2022-05-01"],
-                "dims": ["time", "lat", "lon"],
-                "sources": [
-                    {
-                        "home_url": "https://resources.marine.copernicus.eu/",
-                        "data_url": "https://resources.marine.copernicus.eu/",
-                        "license_url": "https://marine.copernicus.eu/user-corner/service-commitments-and-licence",
-                        "attributions": [],
-                        "processing_steps": [
-                            "Masking out low quality pixels",
-                            "Temporal NaN-mean aggregation",
-                            "Spatial bi-cubic interpolation"
-                        ],
-                        "remarks": ""
-                    }
-                ],
                 "metadata": {
+                    "color_bar_name": "YlGn",
+                    "color_value_min": 0.5,
+                    "color_value_max": 150,
                     "keywords": ["colour", "marine", "chlorophyll"],
                     "processing-level": "L4"
                 }
             }
-        ]
+        ],
+        "sources": [
+            {
+                "name": "Sentinel Hub S2L2A",
+                "variable_names": ["CHL"],
+                "store_id": "sentinelhub",
+                "store_params": {
+                    "num_retries": 80
+                },
+                "data_params": {
+                    "CHL": ["some_parameter"]
+                }
+            }
+        ],
+        "metadata": {
+            "Conventions": "CF-1.9",
+            "acknowledgment": "EO4SIBS, CMEMS, DeepESDL project",
+            "contributor_name": "Brockmann Geomatics Sweden AB",
+            "contributor_url": "www.brockmann-geomatics.se",
+            "creator_email": "info@brockmann-consult.de",
+            "creator_name": "Brockmann Consult GmbH",
+            "creator_url": "www.brockmann-consult.de",
+            "institution": "Brockmann Consult GmbH",
+            "project": "DeepESDL",
+            "publisher_email": "info@brockmann-consult.de",
+            "publisher_name": "Brockmann Consult GmbH",
+            "license_url": "https://creativecommons.org/licenses/by/4.0/",
+            "source": "EO4SIBS, CMEMS",
+            "date_modified": "2022-08-19 16:19:15.359970",
+            "geospatial_lon_min": -6.75,
+            "geospatial_lon_max": 36.5,
+            "geospatial_lat_min": 30.0,
+            "geospatial_lat_max": 46.0,
+            "geospatial_lon_resolution": 0.05,
+            "geospatial_lat_resolution": 0.05,
+            "temporal_coverage_start": "2005-05-01 00:00:00",
+            "temporal_coverage_end": "2022-05-01 23:59:59",
+            "temporal_resolution": "1D"
+        },
+        "time_range": ["2005-05-01", "2022-05-01"],
+        "time_period": "1D",
+        "spatial_ref": "CRS84",
+        "spatial_bbox": [-6.75, 30, 36.5, 46],
+        "spatial_size": [865, 320],
+        "spatial_offset": [0, 0],
+        "spatial_res": [0.05, 0.05]
     },
     "geometry": {
         "type": "Polygon",

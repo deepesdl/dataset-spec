@@ -15,38 +15,67 @@
         "properties": {
             "type": "object",
             "required": [
-                "title",
                 "data_id",
+                "title",
                 "description",
-                "time_range",
-                "time_period",
-                "spatial_ref",
-                "spatial_bbox",
-                "spatial_res",
-                "variables"
+                "version",
+                "license",
+                "variables",
+                "sources"
             ],
             "additionalProperties": false,
             "properties": {
+                "data_id": {
+                    "type": "string",
+                    "description": "unique identification string, filename base",
+                    "examples": [
+                        "OC-CMEMS-MED-005-2005-2022-1d-v1"
+                    ]
+                },
                 "title": {
                     "type": "string",
-                    "description": "the title of the dataset",
+                    "description": "human-readable title of the dataset",
                     "examples": [
                         "Ocean Products in the Mediterranean Sea"
                     ]
                 },
-                "data_id": {
-                    "type": "string",
-                    "description": "a unique dataset identifier",
-                    "examples": [
-                        "OC-CMEMS-MED-005-2005-2022-1d-v1.zarr"
-                    ]
-                },
                 "description": {
                     "type": "string",
-                    "description": "a description of the dataset",
+                    "description": "human-readable description of the dataset",
                     "examples": [
                         "CMEMS Ocean Colour for Mediterranean Sea, 2005-2022"
                     ]
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Version string. Semver format recommended.",
+                    "examples": [
+                        "1.0.3"
+                    ]
+                },
+                "recipe": {
+                    "type": "string",
+                    "description": "URL to repo recipe directory",
+                    "examples": [
+                        "https://example.com/recipe/"
+                    ]
+                },
+                "changes": {
+                    "type": "string",
+                    "description": "URL to CHANGES.md in recipe directory",
+                    "examples": [
+                        "https://example.com/recipe/CHANGES.md"
+                    ]
+                },
+                "license": {
+                    "type": "string",
+                    "description": "URL to CHANGES.md in recipe directory",
+                    "examples": [
+                        "https://example.com/recipe/CHANGES.md"
+                    ]
+                },
+                "metadata": {
+                    "type": "object"
                 },
                 "time_range": {
                     "type": "array",
@@ -61,7 +90,7 @@
                     ]
                 },
                 "time_period": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "examples": ["1D", "2D", "8D", "10D", "2W", "1M"]
                 },
                 "spatial_ref": {
@@ -103,8 +132,35 @@
                     "description": "spatial resolution in units of the spatial coordinate reference system",
                     "examples": [0.05, 10, 300]
                 },
-                "metadata": {
-                    "type": "object"
+                "spatial_size": {
+                    "type": ["array"],
+                    "prefixItems": [
+                        {
+                            "type": "integer",
+                            "minimum": 2
+                        },
+                        {
+                            "type": "integer",
+                            "minimum": 2
+                        }
+                    ],
+                    "items": false,
+                    "description": "the spatial image size as [width, height] in pixels",
+                    "examples": [[6000, 3000], [256, 256]]
+                },
+                "spatial_offset": {
+                    "type": ["array"],
+                    "prefixItems": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "items": false,
+                    "description": "Offset coordinates in units of the CRS",
+                    "examples": [[-180, -90], [0, 0]]
                 },
                 "variables": {
                     "type": "array",
@@ -116,18 +172,23 @@
                         "required": [
                             "name",
                             "long_name",
-                            "units",
-                            "valid_min",
-                            "valid_max",
-                            "time_range",
                             "dtype",
-                            "dims",
-                            "sources"
+                            "dims"
                         ],
                         "properties": {
                             "name": {"type": "string"},
                             "long_name": {"type": "string"},
-                            "units": {"type": "string"},
+                            "dtype": {"type": "string"},
+                            "dims": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "examples": [
+                                  ["time", "y", "x"],
+                                  ["time", "lat", "lon"]
+                                ]
+                            },
+                            "units": {"type": ["string", "null"]},
+                            "fill_value": {"type": "number"},
                             "valid_min": {"type": "number"},
                             "valid_max": {"type": "number"},
                             "time_range": {
@@ -142,90 +203,161 @@
                                 ],
                                 "items": false
                             },
-                            "dtype": {"type": "string"},
-                            "dims": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                                "examples": [
-                                  ["time", "y", "x"],
-                                  ["time", "lat", "lon"]
-                                ]
-                            },
-                             "sources": {
-                                "type": "array",
-                                "minItems": 1,
-                                "items": {
-                                    "type": "object",
-                                    "additionalProperties": true,
-                                    "required": [
-                                        "data_url",
-                                        "license_url"
-                                    ],
-                                    "properties": {
-                                        "home_url": {
-                                            "type": "string",
-                                            "format": "uri",
-                                            "examples": [
-                                                ["https://resources.marine.copernicus.eu/"]
+                            "metadata": {
+                                "type": "object",
+                                "required": [
+                                    "color_bar_name",
+                                    "color_value_min",
+                                    "color_value_max"
+                                ],
+                                "properties": {
+                                    "color_bar_name": {
+                                        "type": "string",
+                                        "description": "name of a matplotlib colormap: https://matplotlib.org/stable/tutorials/colors/colormaps.html",
+                                        "examples": [
+                                            [
+                                                "viridis_r",
+                                                "turbo",
+                                                "prism",
+                                                "Spectral"
                                             ]
-                                        },
-                                        "data_url": {
-                                            "type": "string",
-                                            "format": "uri",
-                                            "examples": [
-                                                ["https://resources.marine.copernicus.eu/"]
-                                            ]
-                                        },
-                                        "license_url": {
-                                            "type": "string",
-                                            "format": "uri",
-                                            "examples": [
-                                                ["https://marine.copernicus.eu/user-corner/service-commitments-and-licence"]
-                                            ]
-                                        },
-                                        "attributions": {
-                                            "type": "array",
-                                            "items": {"type":  "string"}
-                                        },
-                                        "processing_steps": {
-                                            "type": "array",
-                                            "description": "processing steps to be applied to the source",
-                                            "items": {"type":  "string"},
-                                            "examples": [
-                                                [
-                                                    "Masking out low quality pixels",
-                                                    "Temporal NaN-mean aggregation",
-                                                    "Spatial bi-cubic interpolation"
-                                                ]
-                                            ]
-                                        },
-                                        "remarks": {
-                                            "type": "string"
-                                        }
+                                        ]
+                                    },
+                                    "color_value_min": {
+                                        "type": "number",
+                                        "description": "minimum value for colour scale",
+                                        "examples": [
+                                            -10500,
+                                            0,
+                                            1.735e-9,
+                                            4.5e6
+                                        ]
+                                    },
+                                    "color_value_max": {
+                                        "type": "number",
+                                        "description": "maximum value for colour scale",
+                                        "examples": [
+                                            -9500,
+                                            0,
+                                            2.978e-9,
+                                            8.5e6
+                                        ]
                                     }
                                 }
-                             },
-                             "color_bar_name": {
-                                 "type": "string",
-                                 "description": "name of a matplotlib colormap: https://matplotlib.org/stable/tutorials/colors/colormaps.html",
-                                 "examples": [
-                                     ["viridis_r", "turbo", "prism", "Spectral"]
-                                 ]
-                             },
-                             "color_value_min": {
-                                 "type": "number",
-                                 "description": "minimum value for colour scale",
-                                 "examples": [-10500, 0, 1.735e-9, 4.5e6]
-                             },
-                             "color_value_max": {
-                                 "type": "number",
-                                 "description": "maximum value for colour scale",
-                                 "examples": [-9500, 0, 2.978e-9, 8.5e6]
-                             },
-                             "metadata": {
-                                 "type": "object"
                             }
                         }
+                    }
+                },
+                "sources": {
+                    "type": "array",
+                    "description": "Array of data source definitions",
+                    "items": {
+                        "type": "object",
+                        "oneOf": [
+                            {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "human-readable title of this data source",
+                                        "examples": [
+                                            "Sentinel Hub S2L2A"
+                                        ]
+                                    },
+                                    "variable_names": {
+                                        "type": "array",
+                                        "items": {"type":  "string"},
+                                        "description": "array of variable names provided by this data store",
+                                        "examples": [
+                                            [
+                                                "B06",
+                                                "SCL"
+                                            ]
+                                        ]
+                                    },
+                                    "store_id": {
+                                        "type": "string",
+                                        "description": "xcube data store identifier",
+                                        "examples": [
+                                            "sentinelhub"
+                                        ]
+                                    },
+                                    "store_params": {
+                                        "type": "object",
+                                        "description": "xcube parameters used to open the data store",
+                                        "examples": [
+                                            {
+                                                "num_retries": 80
+                                            }
+                                        ]
+                                    },
+                                    "data_params": {
+                                        "type": "object",
+                                        "description": "xcube parameters used to open data from the data store"
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                    "name",
+                                    "variable_names",
+                                    "store_id"
+                                ]
+                            },
+                            {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "human-readable title of this data source",
+                                        "examples": [
+                                            "Sentinel Hub S2L2A"
+                                        ]
+                                    },
+                                    "variables": {
+                                        "type": "object",
+                                        "description": "mapping of variable names to variable sources"
+                                    },
+                                    "download_url": {
+                                        "type": "string",
+                                        "description": "download URL template"
+                                    },
+                                    "protocol": {
+                                        "type": "string",
+                                        "description": "transport protocol; detected from download_url if omitted",
+                                        "examples": [
+                                            "http",
+                                            "ftp"
+                                        ]
+                                    },
+                                    "compressed": {
+                                        "type": "boolean",
+                                        "default": false,
+                                        "description": "whether data is compressed; detected from data if omitted"
+                                    },
+                                    "compression_format": {
+                                        "type": "string",
+                                        "description": "compression format in use; detected from data if omitted"
+                                    },
+                                    "source_format": {
+                                        "type": "string",
+                                        "description": "source format name; detected from filename if omitted",
+                                        "examples": [
+                                            "netcdf",
+                                            "hdf",
+                                            "geotiff"
+                                        ]
+                                    },
+                                    "source_crs": {
+                                        "type": "string",
+                                        "description": "coordinate reference system of source data; detected from data if omitted"
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                    "name",
+                                    "variables",
+                                    "download_url"
+                                ]
+                            }
+                        ]
                     }
                 }
             }
