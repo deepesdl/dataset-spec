@@ -137,11 +137,11 @@
                     "prefixItems": [
                         {
                             "type": "integer",
-                            "exclusiveMinimum": 0
+                            "minimum": 2
                         },
                         {
                             "type": "integer",
-                            "exclusiveMinimum": 0
+                            "minimum": 2
                         }
                     ],
                     "items": false,
