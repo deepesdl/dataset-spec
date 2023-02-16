@@ -253,75 +253,111 @@
                     "description": "Array of data source definitions",
                     "items": {
                         "type": "object",
-                        "additionalProperties": false,
-                        "required": [
-                            "name",
-                            "variable_names",
-                            "store_id"
-                        ],
-                        "dependentRequired": {
-                            "variable_names": ["store_id"],
-                            "store_id": ["variable_names"],
-                            "variables": ["download_url"],
-                            "download_url": ["variables"]
-                        },
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "human-readable title of this data source",
-                                "examples": ["Sentinel Hub S2L2A"]
+                        "oneOf": [
+                            {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "human-readable title of this data source",
+                                        "examples": [
+                                            "Sentinel Hub S2L2A"
+                                        ]
+                                    },
+                                    "variable_names": {
+                                        "type": "array",
+                                        "items": {"type":  "string"},
+                                        "description": "array of variable names provided by this data store",
+                                        "examples": [
+                                            [
+                                                "B06",
+                                                "SCL"
+                                            ]
+                                        ]
+                                    },
+                                    "store_id": {
+                                        "type": "string",
+                                        "description": "xcube data store identifier",
+                                        "examples": [
+                                            "sentinelhub"
+                                        ]
+                                    },
+                                    "store_params": {
+                                        "type": "object",
+                                        "description": "xcube parameters used to open the data store",
+                                        "examples": [
+                                            {
+                                                "num_retries": 80
+                                            }
+                                        ]
+                                    },
+                                    "data_params": {
+                                        "type": "object",
+                                        "description": "xcube parameters used to open data from the data store"
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                    "name",
+                                    "variable_names",
+                                    "store_id"
+                                ]
                             },
-                            "variable_names": {
-                                "type": "array",
-                                "description": "array of variable names provided by this data store",
-                                "examples": [["B06", "SCL"]]
-                            },
-                            "store_id": {
-                                "type": "string",
-                                "description": "xcube data store identifier",
-                                "examples": ["sentinelhub"]
-                            },
-                            "store_params": {
-                                "type": "object",
-                                "description": "xcube parameters used to open the data store",
-                                "examples": [{"num_retries": 80}]
-                            },
-                            "data_params": {
-                                "type": "object",
-                                "description": "xcube parameters used to open data from the data store"
-                            },
-                            "variables": {
-                                "type": "object",
-                                "description": "mapping of variable names to variable sources"
-                            },
-                            "download_url": {
-                                "type": "string",
-                                "description": "download URL template"
-                            },
-                            "protocol": {
-                                "type": "string",
-                                "description": "transport protocol; detected from download_url if omitted",
-                                "examples": ["http", "ftp"]
-                            },
-                            "compressed": {
-                                "type": "boolean",
-                                "default": false,
-                                "description": "whether data is compressed; detected from data if omitted"
-                            },
-                            "compression_format": {
-                                "type": "string",
-                                "description": "compression format in use; detected from data if omitted"
-                            },
-                            "source_format": {
-                                "type": "string",
-                                "description": "source format name; detected from filename if omitted",
-                                "examples": ["netcdf", "hdf", "geotiff"]
-                            },
-                            "source_crs": {
-                                "type": "string",
-                                "description": "coordinate reference system of source data; detected from data if omitted"
+                            {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "human-readable title of this data source",
+                                        "examples": [
+                                            "Sentinel Hub S2L2A"
+                                        ]
+                                    },
+                                    "variables": {
+                                        "type": "object",
+                                        "description": "mapping of variable names to variable sources"
+                                    },
+                                    "download_url": {
+                                        "type": "string",
+                                        "description": "download URL template"
+                                    },
+                                    "protocol": {
+                                        "type": "string",
+                                        "description": "transport protocol; detected from download_url if omitted",
+                                        "examples": [
+                                            "http",
+                                            "ftp"
+                                        ]
+                                    },
+                                    "compressed": {
+                                        "type": "boolean",
+                                        "default": false,
+                                        "description": "whether data is compressed; detected from data if omitted"
+                                    },
+                                    "compression_format": {
+                                        "type": "string",
+                                        "description": "compression format in use; detected from data if omitted"
+                                    },
+                                    "source_format": {
+                                        "type": "string",
+                                        "description": "source format name; detected from filename if omitted",
+                                        "examples": [
+                                            "netcdf",
+                                            "hdf",
+                                            "geotiff"
+                                        ]
+                                    },
+                                    "source_crs": {
+                                        "type": "string",
+                                        "description": "coordinate reference system of source data; detected from data if omitted"
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                    "name",
+                                    "variables",
+                                    "download_url"
+                                ]
                             }
-                        }
+                        ]
                     }
                 }
             }
