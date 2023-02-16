@@ -162,7 +162,7 @@ data cube:
 | long_name  | string             |   Y   | Array of variable definitions.                          | `"Chlorophyll Concentration"`  |
 | dtype      | string             |   Y   | Numpy-compatible data type name.                        | `float32"`                     |
 | dims       | string[]           |   Y   | Array of dimension names.                               | `["time", "lat", "lon"]"`      |
-| units      | string &#124; null |   Y   | Physical unit.                                          | `"mg/m^3"`, `"n.a."`           |
+| units      | string &#124; null |   N   | Physical unit.                                          | `"mg/m^3"`, `"n.a."`           |
 | fill_value | number &#124; null |   N   | Unscaled values equal to `fill_value` are undefined.    | 1.0                            |
 | valid_min  | number             |   N   | Values below that number are undefined.                 | 0.0                            |
 | valid_max  | number             |   N   | Values above that number are undefined.                 | 1.0                            |

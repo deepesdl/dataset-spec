@@ -173,8 +173,7 @@
                             "name",
                             "long_name",
                             "dtype",
-                            "dims",
-                            "units"
+                            "dims"
                         ],
                         "properties": {
                             "name": {"type": "string"},
