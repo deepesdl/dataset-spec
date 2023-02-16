@@ -284,12 +284,12 @@
                             },
                             "store_params": {
                                 "type": "object",
-                                "description": "xcube data store parameters",
+                                "description": "xcube parameters used to open the data store",
                                 "examples": [{"num_retries": 80}]
                             },
-                            "variable_open_params": {
+                            "data_params": {
                                 "type": "object",
-                                "description": "xcube data store open parameters"
+                                "description": "xcube parameters used to open data from the data store"
                             },
                             "variables": {
                                 "type": "object",

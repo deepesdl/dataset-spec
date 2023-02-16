@@ -222,13 +222,13 @@ data files in a described source, usually by some URL or set of URLs.
 
 The following properties describe access to a xcube data store:
 
-| Property             | Type   | Req.? | Description                                          | Example                |
-|----------------------|--------|:-----:|------------------------------------------------------|------------------------|
-| name                 | string |   Y   | Human-readable title of this data source.            | `"Sentinel Hub S2L2A"` |
-| variable_names       | string |   Y   | Array of variable names provided by this data store. | `["B06", "SCL"]`       |
-| store_id             | string |   Y   | xcube data store identifier.                         | `"sentinelhub"`        |
-| store_params         | object |   N   | xcube data store parameters.                         | `{"num_retries": 80}`  |
-| variable_open_params | object |   N   | xcube data store open parameters.                    |                        |
+| Property       | Type   | Req.? | Description                                          | Example                |
+|----------------|--------|:-----:|------------------------------------------------------|------------------------|
+| name           | string |   Y   | Human-readable title of this data source.            | `"Sentinel Hub S2L2A"` |
+| variable_names | string |   Y   | Array of variable names provided by this data store. | `["B06", "SCL"]`    |
+| store_id       | string |   Y   | xcube data store identifier.                         | `"sentinelhub"`        |
+| store_params   | object |   N   | xcube data store parameters.                         | `{"num_retries": 80}` |
+| data_params    | object |   N   | xcube data store open parameters.                    |                        |
 
 `variable_open_params` is an object that maps variable names to specific
 open parameters passed to the given data store.
